@@ -16,4 +16,5 @@ export class AcmZone extends AwsStackBase {
                 `*.${props.name}.${props.project}.com`,
             ]
         })
+    }
 }
