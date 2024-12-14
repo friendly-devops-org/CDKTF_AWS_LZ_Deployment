@@ -13,5 +13,6 @@ export class Route53ZoneStack extends AwsStackBase {
 
         this.zone = new Route53Zone (this, `${id}`, {
             name: `${props.name}.${props.project}.com`,
+        }
     }
-}
+]}
