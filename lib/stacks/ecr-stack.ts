@@ -3,13 +3,14 @@ import { AwsStackBase, BaseStackProps } from './stackbase';
 import { EcrRepository } from '@cdktf/provider-aws/lib/ecr-repository'
 
 export class EcrStack extends AwsStackBase {
+    public ecr: EcrRepository;
     constructor(scope: Construct, id: string, props: BaseStackProps) {
         super(scope,  `${props.name}-${props.project}-${id}`, {
             name: `${props.name}`,
             project: `${props.project}`,
             region: `${props.region}`
         })
-        const ecr = new EcrRepository(this, `${id}`, {
+        this.ecr = new EcrRepository(this, `${id}`, {
             name: "nextcloud",
             imageTagMutability: "MUTABLE",
             imageScanningConfiguration: {
