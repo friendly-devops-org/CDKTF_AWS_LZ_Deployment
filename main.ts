@@ -18,12 +18,12 @@ const RouteProps: RouteConfigs = {
     name: StackProps.name,
     project: StackProps.project,
     region: StackProps.region,
-    dnsName: AcmZone.resourceRecordName,
-    record: AcmZone.resourceRecordValue,
-    type: AcmZone.resourceRecordType
+    dnsName: AcmZone.acm.resourceRecordName,
+    record: AcmZone.acm.resourceRecordValue,
+    type: AcmZone.acm.resourceRecordType
 }
 
-new Route53ZoneStack(app, "route53-stack", StackProps)
+new Route53ZoneStack(app, "route53-stack", RouteProps)
 
 new EcrStack(app,"ecr-stack", StackProps)
 
