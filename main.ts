@@ -2,7 +2,7 @@ import { App } from 'cdktf';
 import { BaseStackProps } from './lib/stacks/stackbase';
 import { EcrStack } from './lib/stacks/ecr-stack';
 import { AcmZone } from './lib/stacks/certificate-manager-stack';
-import { Route53ZoneStack } from './lib/stacks/route53-stack';
+import { Route53ZoneStack, RouteConfigs } from './lib/stacks/route53-stack';
 
 const StackProps: BaseStackProps = {
     name: "aws2",
@@ -13,6 +13,15 @@ const StackProps: BaseStackProps = {
 const app = new App();
 
 new AcmZone(app, "acm-stack", StackProps)
+
+const RouteProps: RouteConfigs = {
+    name: StackProps.name,
+    project: StackProps.project,
+    region: StackProps.region,
+    dnsName: AcmZone.resourceRecordName,
+    record: AcmZone.resourceRecordValue,
+    type: AcmZone.resourceRecordType
+}
 
 new Route53ZoneStack(app, "route53-stack", StackProps)
 
