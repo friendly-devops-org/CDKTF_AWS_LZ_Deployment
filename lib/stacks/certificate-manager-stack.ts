@@ -12,6 +12,7 @@ export class AcmZone extends AwsStackBase {
         })
         this.acm = new AcmCertificate(this, `${id}`, {
             domainName: `${props.name}.${props.project}.com`,
+            validationMethod: "DNS",
             subjectAlternativeNames:[
                 `*.${props.name}.${props.project}.com`,
             ]
