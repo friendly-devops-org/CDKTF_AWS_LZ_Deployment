@@ -18,9 +18,9 @@ const RouteProps: RouteConfigs = {
     name: StackProps.name,
     project: StackProps.project,
     region: StackProps.region,
-    dnsName: acm.acm.resourceRecordName,
-    record: acm.acm.resourceRecordValue,
-    type: acm.acm.resourceRecordType
+    dnsName: acm.acm.domainValidationOption.resourceRecordName,
+    record: acm.acm.domainValidationOption.resourceRecordValue,
+    type: acm.acm.domainValidationOption.resourceRecordType
 }
 
 new Route53ZoneStack(app, "route53-stack", RouteProps)
