@@ -12,15 +12,15 @@ const StackProps: BaseStackProps = {
 
 const app = new App();
 
-new AcmZone(app, "acm-stack", StackProps)
+const acm = new AcmZone(app, "acm-stack", StackProps)
 
 const RouteProps: RouteConfigs = {
     name: StackProps.name,
     project: StackProps.project,
     region: StackProps.region,
-    dnsName: AcmZone.acm.resourceRecordName,
-    record: AcmZone.acm.resourceRecordValue,
-    type: AcmZone.acm.resourceRecordType
+    dnsName: acm.acm.resourceRecordName,
+    record: acm.acm.resourceRecordValue,
+    type: acm.acm.resourceRecordType
 }
 
 new Route53ZoneStack(app, "route53-stack", RouteProps)
