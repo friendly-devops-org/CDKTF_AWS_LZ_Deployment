@@ -13,7 +13,7 @@ export interface RouteConfigs extends BaseStackProps {
 
 export class Route53ZoneStack extends AwsStackBase {
     public record: Route53Record;
-    constructor(scope: Construct, id: string, props: BaseStackProps) {
+    constructor(scope: Construct, id: string, props: RouteConfigs) {
         super(scope, `${props.name}-${props.project}-${id}`, {
             name: props.name,
             project: props.project,
