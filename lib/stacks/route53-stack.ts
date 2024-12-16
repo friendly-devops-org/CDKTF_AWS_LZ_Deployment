@@ -2,13 +2,13 @@ import { Construct } from 'constructs';
 import { AwsStackBase, BaseStackProps } from './stackbase';
 import { Route53Zone } from '@cdktf/provider-aws/lib/route53-zone';
 import { Route53Record } from '@cdktf/provider-aws/lib/route53-record';
-import { AcmZone } from './lib/stacks/certificate-manager-stack';
+import { AcmCertificate } from '@cdktf/provider-aws/lib/acm-certificate'
 
 export interface RouteConfigs extends BaseStackProps {
     name: string,
     project: string,
     region: string,
-    acmZone: AcmZone,
+    acmZone: AcmCertificate,
 }
 
 export class Route53ZoneStack extends AwsStackBase {
@@ -35,7 +35,7 @@ export class Route53ZoneStack extends AwsStackBase {
             allowOverwrite: true
         })
 
-        record.addOverride('for_each', `\${{
+        this.record.addOverride('for_each', `\${{
             for dvo in ${acmZone.fqn}.domain_validation_options : dvo.domain_name => {
               name   = dvo.resource_record_name
               record = dvo.resource_record_value
