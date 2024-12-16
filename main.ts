@@ -5,7 +5,7 @@ import { AcmZone } from './lib/stacks/certificate-manager-stack';
 import { Route53ZoneStack, RouteConfigs } from './lib/stacks/route53-stack';
 
 const StackProps: BaseStackProps = {
-    name: "aws2",
+    name: "aws-test",
     project: "friendlydevops",
     region: "us-east-2"
 }
