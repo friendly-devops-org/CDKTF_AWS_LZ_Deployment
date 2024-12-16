@@ -25,10 +25,10 @@ export class Route53ZoneStack extends AwsStackBase {
         });
 
         this.record = new Route53Record (this, `${props.name}-${id}`, {
-            name: `${each.value.name}`,
-            type: `${each.value.type}`,
+            name: "${each.value.name}",
+            type: "${each.value.type}",
             records: [
-                `${each.value.record}`
+                "${each.value.record}"
             ],
             zoneId: zone.zoneId,
             ttl: 60,
@@ -36,7 +36,7 @@ export class Route53ZoneStack extends AwsStackBase {
         })
 
         this.record.addOverride('for_each', `\${{
-            for dvo in ${acmZone.fqn}.domain_validation_options : dvo.domain_name => {
+            for dvo in ${props.acmZone.fqn}.domain_validation_options : dvo.domain_name => {
               name   = dvo.resource_record_name
               record = dvo.resource_record_value
               type   = dvo.resource_record_type
