@@ -50,6 +50,6 @@ export class Route53ZoneStack extends AwsStackBase {
           certificateArn: acmZone.arn
         })
         this.certValidation.addOverride('validation_record_fqdns', `\${[for record in ${this.record.fqn} : record.fqdn]}`)
-/*
+*/
     }
 }
