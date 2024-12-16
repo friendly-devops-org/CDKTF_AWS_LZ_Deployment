@@ -3,6 +3,8 @@ import { AwsStackBase, BaseStackProps } from './stackbase';
 import { Route53Zone } from '@cdktf/provider-aws/lib/route53-zone';
 import { Route53Record } from '@cdktf/provider-aws/lib/route53-record';
 import { AcmCertificate } from '@cdktf/provider-aws/lib/acm-certificate'
+//Uncomment the following line if AWS is the domain provider.
+//import { AcmCertificateValidation } from '@cdktf/provider-aws/lib/acm-certificate-validation'
 
 export interface RouteConfigs extends BaseStackProps {
     name: string,
@@ -43,5 +45,11 @@ export class Route53ZoneStack extends AwsStackBase {
             }
           }
         }`)
+/*  //Uncomment out this section if AWS is the domain provider.
+        this.certValidation = new aws.AcmCertificateValidation(this, 'certvalidation', {
+          certificateArn: acmZone.arn
+        })
+        this.certValidation.addOverride('validation_record_fqdns', `\${[for record in ${this.record.fqn} : record.fqdn]}`)
+/*
     }
 }
