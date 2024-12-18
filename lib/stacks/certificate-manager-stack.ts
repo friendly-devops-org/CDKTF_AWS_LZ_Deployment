@@ -3,7 +3,7 @@ import { AwsStackBase, BaseStackProps } from './stackbase';
 import { AcmCertificate } from '@cdktf/provider-aws/lib/acm-certificate'
 
 export class AcmZone extends AwsStackBase {
-    public acm: AcmCertificate;
+    public acm; AcmCertificate;
     constructor(scope: Construct, id: string, props: BaseStackProps) {
         super(scope,  `${props.name}-${props.project}-${id}`, {
             name: props.name,

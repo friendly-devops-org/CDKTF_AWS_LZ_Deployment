@@ -14,7 +14,6 @@ export interface RouteConfigs extends BaseStackProps {
 }
 
 export class Route53ZoneStack extends AwsStackBase {
-    public record: Route53Record;
     constructor(scope: Construct, id: string, props: RouteConfigs) {
         super(scope, `${props.name}-${props.project}-${id}`, {
             name: props.name,
@@ -26,7 +25,7 @@ export class Route53ZoneStack extends AwsStackBase {
             name: `${props.name}.${props.project}.com`,
         });
 
-        this.record = new Route53Record (this, `${props.name}-${id}`, {
+        const record = new Route53Record (this, `${props.name}-${id}`, {
             name: "${each.value.name}",
             type: "${each.value.type}",
             records: [
@@ -37,7 +36,7 @@ export class Route53ZoneStack extends AwsStackBase {
             allowOverwrite: true
         })
 
-        this.record.addOverride('for_each', `\${{
+        record.addOverride('for_each', `\${{
             for dvo in ${props.acmZone.fqn}.domain_validation_options : dvo.domain_name => {
               name   = dvo.resource_record_name
               record = dvo.resource_record_value
