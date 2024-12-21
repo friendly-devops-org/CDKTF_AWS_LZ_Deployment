@@ -10,7 +10,7 @@ export interface EcrConfigs extends BaseStackProps {
 }
 
 export class EcrStack extends AwsStackBase {
-    constructor(scope: Construct, id: string, props: BaseStackProps) {
+    constructor(scope: Construct, id: string, props: EcrConfigs) {
         super(scope,  `${props.name}-${props.project}-${id}`, {
             name: `${props.name}`,
             project: `${props.project}`,
