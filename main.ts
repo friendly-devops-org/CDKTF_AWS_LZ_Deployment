@@ -24,14 +24,14 @@ const RouteProps: RouteConfigs = {
 
 new Route53ZoneStack(app, "route53-stack", RouteProps)
 
-const EcrConfig1: BaseStackProps = {
+const EcrConfig1: EcrConfigs = {
     name: StackProps.name,
     project: StackProps.project,
     region: StackProps.region,
     imageName: "nextcloud",
 }
 
-const EcrConfig2: BaseStackProps = {
+const EcrConfig2: EcrConfigs = {
     name: StackProps.name,
     project: StackProps.project,
     region: StackProps.region,
@@ -45,8 +45,8 @@ const KeyProps: KeyConfigs = {
     name: StackProps.name,
     project: StackProps.project,
     region: StackProps.region,
-    keyName: "master-key"
-    publicKey: ${process.env.PUBLIC_KEY}
+    keyName: "master-key",
+    publicKey: process.env.PUBLIC_KEY
 }
 
 new KeyStack(app,"master-key-stack", KeyProps)
