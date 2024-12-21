@@ -1,27 +1,24 @@
 import { Construct } from 'constructs';
 import { AwsStackBase, BaseStackProps } from './stackbase';
-import { EcrRepository } from '@cdktf/provider-aws/lib/ecr-repository'
+import { KeyPair } from '@cdktf/provider-aws/lib/key-pair'
 
-export interface EcrConfigs extends BaseStackProps {
+export interface KeyConfigs extends BaseStackProps {
     name: string,
     project: string,
     region: string,
-    imageName: string,
+    keyName: string,
+    publicKey: string,
 }
 
-export class EcrStack extends AwsStackBase {
+export class KeyStack extends AwsStackBase {
     constructor(scope: Construct, id: string, props: BaseStackProps) {
         super(scope,  `${props.name}-${props.project}-${id}`, {
             name: `${props.name}`,
             project: `${props.project}`,
             region: `${props.region}`
         })
-        new EcrRepository(this, `${id}`, {
-            name: `${props.name}`,
-            imageTagMutability: "MUTABLE",
-            imageScanningConfiguration: {
-                scanOnPush: true
-            }
-        });
+        new KeyPair(this, `${id}`, {
+            name: `${props.keyName}`,
+            publicKey: "MUTABLE",
     }
 }

@@ -1,6 +1,7 @@
 import { App } from 'cdktf';
 import { BaseStackProps } from './lib/stacks/stackbase';
-import { EcrStack } from './lib/stacks/ecr-stack';
+import { EcrStack, EcrConfigs } from './lib/stacks/ecr-stack';
+import { KeyStack, KeyConfigs } from './lib/stacks/key-stack';
 import { AcmZone } from './lib/stacks/certificate-manager-stack';
 import { Route53ZoneStack, RouteConfigs } from './lib/stacks/route53-stack';
 
@@ -23,7 +24,32 @@ const RouteProps: RouteConfigs = {
 
 new Route53ZoneStack(app, "route53-stack", RouteProps)
 
-new EcrStack(app,"ecr-stack", StackProps)
+const EcrConfig1: BaseStackProps = {
+    name: StackProps.name,
+    project: StackProps.project,
+    region: StackProps.region,
+    imageName: "nextcloud",
+}
+
+const EcrConfig2: BaseStackProps = {
+    name: StackProps.name,
+    project: StackProps.project,
+    region: StackProps.region,
+    imageName: "wordpress",
+}
+
+new EcrStack(app,"ecr-nextcloud-stack", EcrConfig1)
+new EcrStack(app,"ecr-wordpress-stack", EcrConfig2)
+
+const KeyProps: KeyConfigs = {
+    name: StackProps.name,
+    project: StackProps.project,
+    region: StackProps.region,
+    keyName: "master-key"
+    publicKey: ${process.env.PUBLIC_KEY}
+}
+
+new KeyStack(app,"master-key-stack", KeyProps)
 
 // To deploy using Terraform Cloud comment out the above line
 // And uncomment the below block of lines
