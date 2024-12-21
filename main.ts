@@ -46,7 +46,7 @@ const KeyProps: KeyConfigs = {
     project: StackProps.project,
     region: StackProps.region,
     keyName: "master-key",
-    publicKey: process.env.PUBLIC_KEY
+    publicKey: `${process.env.PUBLIC_KEY}`
 }
 
 new KeyStack(app,"master-key-stack", KeyProps)
