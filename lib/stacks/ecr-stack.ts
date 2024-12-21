@@ -17,7 +17,7 @@ export class EcrStack extends AwsStackBase {
             region: `${props.region}`
         })
         new EcrRepository(this, `${id}`, {
-            name: `${props.name}`,
+            name: `${props.imageName}`,
             imageTagMutability: "MUTABLE",
             imageScanningConfiguration: {
                 scanOnPush: true
