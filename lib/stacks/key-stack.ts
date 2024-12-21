@@ -18,8 +18,8 @@ export class KeyStack extends AwsStackBase {
             region: `${props.region}`
         })
         new KeyPair(this, `${id}`, {
-            keyName: `${props.keyName}`,
-            publicKey: "MUTABLE",
+            keyName: props.keyName,
+            publicKey: props.publicKey,
         })
     }
 }
