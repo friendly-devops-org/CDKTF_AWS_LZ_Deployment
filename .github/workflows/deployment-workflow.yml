@@ -49,3 +49,4 @@ jobs:
           cdktf --app "npx ts-node main.ts" ${{ inputs.deploymenttype }} "*" --auto-approve
         env:
           STATE_BUCKET: ${{ secrets.BUCKET_NAME }}
+          PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
