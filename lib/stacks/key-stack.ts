@@ -11,14 +11,15 @@ export interface KeyConfigs extends BaseStackProps {
 }
 
 export class KeyStack extends AwsStackBase {
-    constructor(scope: Construct, id: string, props: BaseStackProps) {
+    constructor(scope: Construct, id: string, props: KeyConfigs) {
         super(scope,  `${props.name}-${props.project}-${id}`, {
             name: `${props.name}`,
             project: `${props.project}`,
             region: `${props.region}`
         })
         new KeyPair(this, `${id}`, {
-            name: `${props.keyName}`,
+            keyName: `${props.keyName}`,
             publicKey: "MUTABLE",
+        })
     }
 }
